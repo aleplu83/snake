@@ -85,13 +85,11 @@ public class Field extends JPanel implements KeyListener,Runnable {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		drawSnake(g);
 		drawFruit(g);
@@ -123,30 +121,30 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		// TODO Auto-generated method stub
 		while (true) {
 			try {
-				if (isCollision()) {
-					gameOver();
-				}
-				
-				if (gotFruit()) {
-					snake.grow();
-					fruitsTotal+=1;
-					fruit = new Fruit(snake.getBody());
-					for (int i=0;i<levels.length;i++) {
-						if (fruitsTotal==levels[i]) {
-							level=i+1;
-						}
-					}
-					printStats();
-				}
-				
-				snake.move();
 				Thread.sleep(speeds[level]);
-				repaint();
-				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+			}
+			repaint();
+			
+			if (isCollision()) {
+				gameOver();
+			}
+			
+			if (gotFruit()) {
+				snake.grow();
+				fruitsTotal+=1;
+				fruit = new Fruit(snake.getBody());
+				for (int i=0;i<levels.length;i++) {
+					if (fruitsTotal==levels[i]) {
+						level=i;
+					}
+				}
+				printStats();
+			}
+			
+			snake.move();
 			
 		}
 		
@@ -157,9 +155,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		g2d.setColor(Color.YELLOW);
 		for (int i=0;i<snake.getBody().length;i++) 
 			g2d.fillRect(snake.getBody()[i].x, snake.getBody()[i].y, 10, 10);
-		
+
 		g2d.dispose();
-		
 	}
 	
 	public void drawFruit(Graphics g) {
