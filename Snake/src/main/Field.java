@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 
 public class Field extends JPanel implements KeyListener,Runnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Snake snake;
 	private Thread thread;
 	private Fruit fruit;
@@ -136,7 +140,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				}
 				
 				snake.move();
-				thread.sleep(speeds[level]);
+				Thread.sleep(speeds[level]);
 				repaint();
 				
 			} catch (InterruptedException e) {
