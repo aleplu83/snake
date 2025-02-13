@@ -120,13 +120,15 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true) {
+			snake.move();
+			repaint();
+			
 			try {
 				Thread.sleep(speeds[level]);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			repaint();
 			
 			if (isCollision()) {
 				gameOver();
@@ -144,7 +146,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				printStats();
 			}
 			
-			snake.move();
+			
 			
 		}
 		
