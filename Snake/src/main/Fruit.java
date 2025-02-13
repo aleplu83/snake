@@ -4,30 +4,28 @@ import java.awt.Point;
 
 public class Fruit {
 	
-	private Point pos;
+	private Point fruitPos;
 
-	public Fruit(Point[] excluded) {
-		int rndX=0;
-		int rndY=0;
-		
-		for (int i=0;i<excluded.length;i++) { // make sure we do not place the fruit on the snake's body :-)
-			do {
-				
-				rndX=getRnd(10,490);
-				rndY=getRnd(10,490);
-				
-			} while (excluded[i].x == rndX || excluded[i].y == rndY);
-			
+	public Fruit(Point[] snakePos) {
+		do {
+			fruitPos=new Point(getRnd(10,490),getRnd(10,490));
+		} while (isSnakeBody(snakePos, fruitPos)==true);
+	}
+	
+	private boolean isSnakeBody(Point [] snakeBody,Point fruitPos) {
+		for (int i=0;i<snakeBody.length;i++) { 
+			if (fruitPos.x==snakeBody[i].x && fruitPos.y==snakeBody[i].y) {
+				return true;
+			}	
 		}
-		
-		pos=new Point(rndX,rndY);
+		return false;
 	}
 
 	/**
 	 * @return the pos
 	 */
-	public Point getPos() {
-		return pos;
+	public Point getFruitPos() {
+		return fruitPos;
 	}
 	
 	private int getRnd(int min,int max) {
