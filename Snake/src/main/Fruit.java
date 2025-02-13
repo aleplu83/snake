@@ -9,7 +9,7 @@ public class Fruit {
 	public Fruit(Point[] snakePos) {
 		do {
 			fruitPos=new Point(getRnd(10,490),getRnd(10,490));
-		} while (isSnakeBody(snakePos, fruitPos)==true);
+		} while (isSnakeBody(snakePos, fruitPos));
 	}
 	
 	private boolean isSnakeBody(Point [] snakeBody,Point fruitPos) {
