@@ -42,7 +42,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	private void start() { // start game
 		snake=new Snake();
-		snake.create();
 		fruit = new Fruit(snake.getBody());
 		thread = new Thread(this);
 		thread.start();
