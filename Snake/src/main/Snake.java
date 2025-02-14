@@ -12,6 +12,7 @@ public class Snake {
 
 	public Snake() {
 		super();
+		create();
 	}
 	
 	public void create() {
