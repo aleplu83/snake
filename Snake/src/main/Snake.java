@@ -102,6 +102,15 @@ public class Snake {
 			direction=Direction.EAST;
 	}
 	
+	private boolean isMyBody(int x,int y) {
+		for (int i=0;i<body.length;i++) { 
+			if (x==body[i].x && y==body[i].y) {
+				return true;
+			}	
+		}
+		return false;
+	}
+	
 	/**
 	 * @return the body
 	 */
@@ -109,25 +118,45 @@ public class Snake {
 		return body;
 	}
 
-	public void move() {
+	protected boolean move() {
 		for (int i=body.length-1;i!=0;i--) {
 			body[i].x=body[i-1].x;
 			body[i].y=body[i-1].y;
 		}
 		switch (direction) {
 		case Direction.EAST:
-			body[0].x+=10;
+			if (!isMyBody(body[0].x+10,body[0].y))
+					body[0].x+=10;
+			else
+				return false;
 			break;
 		case Direction.WEST:
-			body[0].x-=10;
+			if (!isMyBody(body[0].x-10,body[0].y))
+				body[0].x-=10;
+			else
+				return false;
 			break;
 		case Direction.NORTH:
-			body[0].y-=10;
+			if (!isMyBody(body[0].x,body[0].y-10))
+				body[0].y-=10;
+			else
+				return false;
 			break;
 		case Direction.SOUTH:
-			body[0].y+=10;
+			if (!isMyBody(body[0].x,body[0].y+10))
+				body[0].y+=10;
+			else
+				return false;
 			break;
 		}
+		return true;
+	}
+
+	/**
+	 * @return the direction
+	 */
+	public Direction getDirection() {
+		return direction;
 	}
 	
 	

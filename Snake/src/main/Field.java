@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class Field extends JPanel implements KeyListener,Runnable {
@@ -20,8 +22,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int speeds[] = {150,125,100,85,60};
 	
 	public Field() {
+		setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		setBackground(Color.BLACK);
-		setSize(500,500);
+		//setSize(500,500);
 		setPreferredSize(new Dimension(500,500));
 		addKeyListener(this);
 		setFocusable(true);
@@ -92,8 +95,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	private boolean isCollision() {
 		
-		if (snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || snake.getBody()[0].x > 500 || snake.getBody()[0].y > 500)
+		if (snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || snake.getBody()[0].x > 490 || snake.getBody()[0].y > 490)
 			return true;
+		
 		
 		return false;
 	}
@@ -114,8 +118,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (true) {
-			snake.move();
+		while (snake.move()) {
+			
 			repaint();
 			
 			try {
@@ -140,9 +144,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				}
 				printStats();
 			}
-			
-			
-			
 		}
 		
 	}

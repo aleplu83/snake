@@ -10,6 +10,8 @@ public class Fruit {
 		do {
 			fruitPos=new Point(getRnd(10,490),getRnd(10,490));
 		} while (isSnakeBody(snakePos, fruitPos));
+		
+		System.out.println("fruit position: "+fruitPos.toString());
 	}
 	
 	private boolean isSnakeBody(Point [] snakeBody,Point fruitPos) {
