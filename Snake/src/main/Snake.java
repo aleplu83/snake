@@ -126,7 +126,7 @@ public class Snake {
 		switch (direction) {
 		case Direction.EAST:
 			if (!isMyBody(body[0].x+10,body[0].y))
-					body[0].x+=10;
+				body[0].x+=10;
 			else
 				return false;
 			break;

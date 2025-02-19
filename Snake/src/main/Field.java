@@ -93,6 +93,13 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		drawFruit(g);
 	}
 	
+	/**
+	 * @return the level
+	 */
+	public int getLevel() {
+		return level;
+	}
+
 	private boolean isCollision() {
 		
 		if (snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || snake.getBody()[0].x > 490 || snake.getBody()[0].y > 490)
