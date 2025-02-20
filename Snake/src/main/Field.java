@@ -13,7 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class Field extends JPanel implements KeyListener,Runnable {
-
+ 
 	private Snake snake;
 	private Thread thread;
 	private Point fruit;
@@ -181,6 +181,11 @@ public class Field extends JPanel implements KeyListener,Runnable {
         g2d.setColor(Color.GREEN);
         g2d.drawLine(fruit.x+5, fruit.y, fruit.x+5, fruit.y-3);
 		g2d.dispose();
+	}
+
+	public int getFruits() {
+		// TODO Auto-generated method stub
+		return fruitsTotal;
 	}
 
 }
