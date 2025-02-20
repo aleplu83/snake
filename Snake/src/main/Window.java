@@ -14,7 +14,6 @@ public class Window {
 	private JFrame mainWindow;
 	private JPanel fieldPanel,statsPanel;
 	private Field field;
-	private Stats stats;
 	private JLabel Level,Points;
 	
 	public Window() {
@@ -22,17 +21,13 @@ public class Window {
 		field = new Field();
 		fieldPanel = new JPanel();
 		statsPanel = new JPanel();
-		stats = new Stats(new BorderLayout());
 		Level = new JLabel();
 		Level.setBorder(BorderFactory.createTitledBorder("Level"));
 		Level.setSize(new Dimension(100, 600));
 		Level.setMinimumSize(new Dimension(100, 600));
 		Level.setMaximumSize(new Dimension(100, 600));
-		stats.add(Level,BorderLayout.NORTH);
 		Level.setText("Level "+field.getLevel());
-		stats.setPreferredSize(new Dimension(100,500));
 		fieldPanel.add(field);
-		statsPanel.add(stats,new FlowLayout());
 		mainWindow.setLayout(new BorderLayout());
 		mainWindow.add(fieldPanel,BorderLayout.WEST);
 		mainWindow.add(statsPanel,BorderLayout.EAST);

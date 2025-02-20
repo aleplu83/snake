@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -15,7 +16,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 
 	private Snake snake;
 	private Thread thread;
-	private Fruit fruit;
+	private Point fruit;
 	private int fruitsTotal=0;
 	private int level=0;
 	private int levels[] = {15,25,40,55,70};
@@ -24,29 +25,28 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public Field() {
 		setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		setBackground(Color.BLACK);
-		//setSize(500,500);
 		setPreferredSize(new Dimension(500,500));
 		addKeyListener(this);
 		setFocusable(true);
 		requestFocus();
 		
-		start();
+		
+		fruit = new Point();
+		snake = new Snake();
+		placeFruit();
+		thread = new Thread(this);
+		thread.start();
 		
 	}
 	
+	private void placeFruit()  {
+		do {
+			fruit.x=getRnd(10,490);
+			fruit.y=getRnd(10,490);
+		} while (snake.isMyBody(fruit.x, fruit.y));
+	}
+	
 	private void gameOver() {
-		stop();
-		start();
-	}
-	
-	private void start() { // start game
-		snake=new Snake();
-		fruit = new Fruit(snake.getBody());
-		thread = new Thread(this);
-		thread.start();
-	}
-	
-	private void stop() { // stop game
 		level=0;
 		fruitsTotal=0;
 		try {
@@ -111,7 +111,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	private boolean gotFruit() {
 		
-		if (snake.getBody()[0].x == fruit.getFruitPos().x && snake.getBody()[0].y == fruit.getFruitPos().y) 
+		if (snake.getBody()[0].x == fruit.x && snake.getBody()[0].y == fruit.y) 
 			return true;
 		
 		return false;
@@ -143,7 +143,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 			if (gotFruit()) {
 				snake.grow();
 				fruitsTotal+=1;
-				fruit = new Fruit(snake.getBody());
+				
+				placeFruit();
 				for (int i=0;i<levels.length;i++) {
 					if (fruitsTotal==levels[i]) {
 						level=i;
@@ -153,6 +154,15 @@ public class Field extends JPanel implements KeyListener,Runnable {
 			}
 		}
 		
+	}
+	
+	private int getRnd(int min,int max) {
+		int rndNumber;
+		do {
+			rndNumber=((int) (Math.random() * 500));
+		} while (rndNumber < min || rndNumber > max);
+		
+		return (int) (Math.ceil(rndNumber / 10.0)*10);
 	}
 	
 	public void drawSnake(Graphics g) {
@@ -167,9 +177,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public void drawFruit(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setColor(Color.RED);
-        g2d.fillOval(fruit.getFruitPos().x,fruit.getFruitPos().y,10,10);
+        g2d.fillOval(fruit.x,fruit.y,10,10);
         g2d.setColor(Color.GREEN);
-        g2d.drawLine(fruit.getFruitPos().x+5, fruit.getFruitPos().y, fruit.getFruitPos().x+5, fruit.getFruitPos().y-3);
+        g2d.drawLine(fruit.x+5, fruit.y, fruit.x+5, fruit.y-3);
 		g2d.dispose();
 	}
 

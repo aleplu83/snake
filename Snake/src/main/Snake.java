@@ -102,7 +102,7 @@ public class Snake {
 			direction=Direction.EAST;
 	}
 	
-	private boolean isMyBody(int x,int y) {
+	protected boolean isMyBody(int x,int y) {
 		for (int i=0;i<body.length;i++) { 
 			if (x==body[i].x && y==body[i].y) {
 				return true;
