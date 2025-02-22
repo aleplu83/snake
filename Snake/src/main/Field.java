@@ -17,7 +17,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int fruitsTotal=0;
 	private int level=0;
 	private int levels[] = {15,25,40,55,70};
-	private int speeds[] = {150,125,100,85,60};
+	private int speeds[] = {200,150,100,80,40};
 	private Dimension fieldSize;
 	
 	public Field(Dimension size) {
@@ -147,7 +147,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				placeFruit();
 				for (int i=0;i<levels.length;i++) {
 					if (fruitsTotal==levels[i]) {
-						level=i;
+						level=i; //raise level
 					}
 				}
 				printStats();
