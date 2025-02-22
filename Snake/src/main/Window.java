@@ -3,7 +3,6 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -20,23 +19,24 @@ public class Window {
 	
 	public Window() {
 		mainWindow = new JFrame("Snake");
-		field = new Field();
-		fieldPanel = new JPanel(new FlowLayout());
+		mainWindow.setLocationByPlatform(true);
+		fieldPanel = new JPanel();
+		fieldPanel.setPreferredSize(new Dimension(600,600));
+		field = new Field(new Dimension(600,600));
+		fieldPanel.add(field);
 		statsPanel = new JPanel(new FlowLayout());
 		lblStats = new JLabel();
 		lblStats.setBorder(BorderFactory.createTitledBorder("Level"));
 		lblStats.setVerticalTextPosition(SwingConstants.TOP);
 		lblStats.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblStats.setText("Points: ");
-		fieldPanel.add(field);
 		mainWindow.setLayout(new BorderLayout());
 		mainWindow.add(fieldPanel,BorderLayout.WEST);
-		statsPanel.add(lblStats);
-		mainWindow.add(statsPanel,BorderLayout.EAST);
-		mainWindow.setSize(700,500);
+		statsPanel.add(lblStats,FlowLayout.LEFT);
+		mainWindow.add(statsPanel,BorderLayout.SOUTH);
+		mainWindow.setSize(800,700);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainWindow.setLocation(600, 200);
-		mainWindow.pack();
+		//mainWindow.pack();
 		mainWindow.setVisible(true);
 		mainWindow.setResizable(false);
 		
