@@ -8,8 +8,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class Field extends JPanel implements KeyListener,Runnable {
@@ -21,11 +19,13 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int level=0;
 	private int levels[] = {15,25,40,55,70};
 	private int speeds[] = {150,125,100,85,60};
+	private Dimension fieldSize;
 	
-	public Field() {
+	public Field(Dimension size) {
 		//setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		this.fieldSize=size;
 		setBackground(Color.BLACK);
-		setPreferredSize(new Dimension(500,500));
+		setPreferredSize(size);
 		addKeyListener(this);
 		setFocusable(true);
 		requestFocus();
@@ -41,8 +41,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	private void placeFruit()  {
 		do {
-			fruit.x=getRnd(10,490);
-			fruit.y=getRnd(10,490);
+			fruit.x=getRnd(10,fieldSize.width-10);
+			fruit.y=getRnd(10,fieldSize.height-10);
 		} while (snake.isMyBody(fruit.x, fruit.y));
 	}
 	
@@ -102,7 +102,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 
 	private boolean isCollision() {
 		
-		if (snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || snake.getBody()[0].x > 490 || snake.getBody()[0].y > 490)
+		if (snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || 
+			snake.getBody()[0].x > (fieldSize.width-10) || snake.getBody()[0].y > fieldSize.height-10)
 			return true;
 		
 		
@@ -159,7 +160,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int getRnd(int min,int max) {
 		int rndNumber;
 		do {
-			rndNumber=((int) (Math.random() * 500));
+			rndNumber=((int) (Math.random() * fieldSize.width));
 		} while (rndNumber < min || rndNumber > max);
 		
 		return (int) (Math.ceil(rndNumber / 10.0)*10);
@@ -168,9 +169,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public void drawSnake(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setColor(Color.YELLOW);
-		for (int i=0;i<snake.getBody().length;i++) 
-			g2d.fillRect(snake.getBody()[i].x, snake.getBody()[i].y, 10, 10);
-
+		for (Point rect : snake.getBody()) {
+			g2d.fill3DRect(rect.x, rect.y, 10, 10, true);
+		}
 		g2d.dispose();
 	}
 	
