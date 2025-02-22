@@ -6,21 +6,21 @@ import java.awt.Rectangle;
 public class Snake {
 
 	private Direction direction = Direction.EAST;
-	private Point[] body;
-	private Point[] newBody;
+	private Rectangle[] body;
+	//private Point[] newBody;
 	//private Point position = new Point(80,80);
-	private int size; // start length of the snake. 4 blocks of 10px
+	//private int size; // start length of the snake. 4 blocks of 10px
 
 	public Snake() {
-		this.size=4; //default size of 4 block
-		create(80,80);
+		//this.size=4; //default size of 4 block
+		//create(80,80);
 	}
 	
-	public Snake(int size) {
+	/*public Snake(int size) {
 		this.size=size;
-	}
+	}*/
 	
-	public void create(int startX,int startY) {
+	/*public void create(int startX,int startY) {
 		body = new Point[size];
 		body[0] = new Point(startX,startY);
 		switch (direction) {
@@ -45,10 +45,10 @@ public class Snake {
 			}
 			break;
 		}
-	}
+	}*/
 	
 	public void grow() {
-		size++;
+		/*size++;
 		switch (direction) {
 		case Direction.EAST:
 			newBody = new Point[size];
@@ -78,7 +78,7 @@ public class Snake {
 			body=newBody;
 			body[size-1] = new Point(body[0].x,body[0].y-((size-1)*10));
 		break;
-		}
+		}*/
 	
 		
 	}
@@ -103,11 +103,30 @@ public class Snake {
 			direction=Direction.EAST;
 	}
 	
-	protected boolean isMyBody(int x,int y) {
-		for (int i=0;i<body.length;i++) { 
+	protected boolean isMyBody(Rectangle rect) {
+		/*for (int i=0;i<body.length;i++) { 
 			if (x==body[i].x && y==body[i].y) {
 				return true;
 			}	
+		}*/
+		for (Rectangle rectangle : body) {
+			if (rectangle.contains(rect)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected boolean isMyBody(int x,int y) {
+		/*for (int i=0;i<body.length;i++) { 
+			if (x==body[i].x && y==body[i].y) {
+				return true;
+			}	
+		}*/
+		for (int i = 0; i < body.length; i++) {
+			if (x==body[i].x && y==body[i].y) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -115,12 +134,12 @@ public class Snake {
 	/**
 	 * @return the body
 	 */
-	public Point[] getBody() {
+	/*public Point[] getBody() {
 		return body;
-	}
+	}*/
 
 	protected boolean move() {
-		for (int i=body.length-1;i!=0;i--) {
+		/*for (int i=body.length-1;i!=0;i--) {
 			body[i].x=body[i-1].x;
 			body[i].y=body[i-1].y;
 		}
@@ -146,6 +165,14 @@ public class Snake {
 		case Direction.SOUTH:
 			if (!isMyBody(body[0].x,body[0].y+10))
 				body[0].y+=10;
+			else
+				return false;
+			break;
+		}*/
+		switch (direction) {
+		case Direction.EAST:
+			if (!isMyBody(body[0].x+10,body[0].y)) 
+				body[0].x+=10;
 			else
 				return false;
 			break;
