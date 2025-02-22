@@ -9,38 +9,29 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class Window {
 
 	private JFrame mainWindow;
 	private JPanel fieldPanel,statsPanel;
 	private Field field;
-	private JLabel lblLevel,lblFruits;
+	private JLabel lblStats;
 	
 	public Window() {
 		mainWindow = new JFrame("Snake");
 		field = new Field();
 		fieldPanel = new JPanel(new FlowLayout());
 		statsPanel = new JPanel(new FlowLayout());
-		lblLevel = new JLabel();
-		lblLevel.setBorder(BorderFactory.createTitledBorder("Level"));
-		lblLevel.setSize(new Dimension(100, 100));
-		lblLevel.setPreferredSize(new Dimension(100,100));
-		lblLevel.setMinimumSize(new Dimension(100, 100));
-		lblLevel.setMaximumSize(new Dimension(100, 100));
-		lblLevel.setText(field.getLevel()+"");
-		lblFruits = new JLabel();
-		lblFruits.setBorder(BorderFactory.createTitledBorder("Fruits"));
-		lblFruits.setSize(new Dimension(100, 100));
-		lblFruits.setPreferredSize(new Dimension(100,100));
-		lblFruits.setMinimumSize(new Dimension(100, 100));
-		lblFruits.setMaximumSize(new Dimension(100, 100));
-		lblFruits.setText(field.getFruits()+"");
+		lblStats = new JLabel();
+		lblStats.setBorder(BorderFactory.createTitledBorder("Level"));
+		lblStats.setVerticalTextPosition(SwingConstants.TOP);
+		lblStats.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblStats.setText("Points: ");
 		fieldPanel.add(field);
 		mainWindow.setLayout(new BorderLayout());
 		mainWindow.add(fieldPanel,BorderLayout.WEST);
-		statsPanel.add(lblLevel);
-		statsPanel.add(lblFruits);
+		statsPanel.add(lblStats);
 		mainWindow.add(statsPanel,BorderLayout.EAST);
 		mainWindow.setSize(700,500);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

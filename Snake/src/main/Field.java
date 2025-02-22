@@ -23,7 +23,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int speeds[] = {150,125,100,85,60};
 	
 	public Field() {
-		setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		//setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(500,500));
 		addKeyListener(this);
@@ -179,7 +179,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		g2d.setColor(Color.RED);
         g2d.fillOval(fruit.x,fruit.y,10,10);
         g2d.setColor(Color.GREEN);
-        g2d.drawLine(fruit.x+5, fruit.y, fruit.x+5, fruit.y-3);
+        g2d.drawLine(fruit.x+5, fruit.y, fruit.x, fruit.y-3);
+        g2d.drawLine(fruit.x+5, fruit.y, fruit.x+10, fruit.y-3);
 		g2d.dispose();
 	}
 
