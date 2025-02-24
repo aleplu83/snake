@@ -14,7 +14,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
  
 	private Snake snake;
 	private Thread thread;
-	private Point fruit;
+	private Fruit fruit;
 	private int fruitsTotal=0;
 	private int level=0;
 	private int levels[] = {0,15,30,70,120,250,400};
@@ -31,7 +31,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		requestFocus();
 		
 		
-		fruit = new Point();
+		fruit = new Fruit();
 		snake = new Snake();
 		placeFruit();
 		thread = new Thread(this);
@@ -41,9 +41,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	private void placeFruit()  {
 		do {
-			fruit.x=getRnd(10,fieldSize.width-10);
-			fruit.y=getRnd(10,fieldSize.height-10);
-		} while (snake.isMyBody(fruit.x, fruit.y));
+			fruit.getPos().x=getRnd(10,fieldSize.width-10);
+			fruit.getPos().y=getRnd(10,fieldSize.height-10);
+		} while (snake.isMyBody(fruit.getPos().x, fruit.getPos().y));
 	}
 	
 	private void gameOver() {
@@ -112,7 +112,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	private boolean gotFruit() {
 		
-		if (snake.getBody()[0].x == fruit.x && snake.getBody()[0].y == fruit.y) 
+		if (snake.getBody()[0].x == fruit.getPos().x && snake.getBody()[0].y == fruit.getPos().y) 
 			return true;
 		
 		return false;
@@ -178,10 +178,10 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public void drawFruit(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setColor(Color.RED);
-        g2d.fillOval(fruit.x,fruit.y,10,10);
+        g2d.fillOval(fruit.getPos().x,fruit.getPos().y,10,10);
         g2d.setColor(Color.GREEN);
-        g2d.drawLine(fruit.x+5, fruit.y, fruit.x, fruit.y-3);
-        g2d.drawLine(fruit.x+5, fruit.y, fruit.x+10, fruit.y-3);
+        g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
+        g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
 		g2d.dispose();
 	}
 
