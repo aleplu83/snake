@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Field extends JPanel implements KeyListener,Runnable {
  
 	private Snake snake;
@@ -16,8 +17,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private Point fruit;
 	private int fruitsTotal=0;
 	private int level=0;
-	private int levels[] = {15,25,40,55,70};
-	private int speeds[] = {200,150,100,80,40};
+	private int levels[] = {0,15,30,70,120,250,400};
+	private int speeds[] = {350,300,260,200,150,100,80};
 	private Dimension fieldSize;
 	
 	public Field(Dimension size) {
