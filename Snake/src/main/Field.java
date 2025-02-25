@@ -148,7 +148,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				fruit = new Fruit(newFruitPos(),Color.RED,speeds[level]/speeds[level]*timeouts[level],speeds[level]/speeds[level]*timeouts[level]);
 				printStats();
 			}
-				
 			
 			if (gotFruit()) {
 				snake.grow();
@@ -196,9 +195,16 @@ public class Field extends JPanel implements KeyListener,Runnable {
         } else if (fruit.getTimeout()<15) {
         	g2d.setColor(Color.RED);
         }
-        	
         g2d.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y+15);
+        if (fruit.getPos().x+10 > fieldSize.width-10) {
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y+15);
+        } else if (fruit.getPos().y+15 > fieldSize.height-15) {
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y-15);
+        } else if ((fruit.getPos().x+10 > fieldSize.width-10) && (fruit.getPos().y+15 > fieldSize.height-15)) {
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y-15);
+        } else {
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y+15);
+        }
         g2d.setColor(Color.GREEN);
         g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
         g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
