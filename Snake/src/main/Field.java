@@ -30,20 +30,21 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		setFocusable(true);
 		requestFocus();
 		
-		
-		fruit = new Fruit();
 		snake = new Snake();
-		placeFruit();
+		fruit = new Fruit(getFruitPos(),Color.RED,1,-1);
+		
 		thread = new Thread(this);
 		thread.start();
 		
 	}
 	
-	private void placeFruit()  {
+	private Point getFruitPos() {
+		Point p = new Point();
 		do {
-			fruit.getPos().x=getRnd(10,fieldSize.width-10);
-			fruit.getPos().y=getRnd(10,fieldSize.height-10);
-		} while (snake.isMyBody(fruit.getPos().x, fruit.getPos().y));
+			p.x=getRnd(10,fieldSize.width-10);
+			p.y=getRnd(10,fieldSize.height-10);
+		} while (snake.isMyBody(p.x, p.y));
+		return p;
 	}
 	
 	private void gameOver() {
@@ -55,12 +56,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -81,10 +76,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		}
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-
-	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -145,7 +136,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				snake.grow();
 				fruitsTotal+=1;
 				
-				placeFruit();
+				fruit.setPos(getFruitPos());
 				for (int i=0;i<levels.length;i++) {
 					if (fruitsTotal==levels[i]) {
 						level=i; //raise level
@@ -188,6 +179,18 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public int getFruits() {
 		// TODO Auto-generated method stub
 		return fruitsTotal;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
