@@ -12,7 +12,7 @@ public class Fruit {
 	
 	/**
 	 * @param pos position on the field
-	 * @param color color of the fruit
+	 * @param color colour of the fruit
 	 * @param value how many points is this fruit 
 	 * @param timeout timeout in seconds before the fruit disappears
 	 */
@@ -43,14 +43,14 @@ public class Fruit {
 	}
 
 	/**
-	 * @return the color
+	 * @return the colour
 	 */
 	public Color getColor() {
 		return color;
 	}
 
 	/**
-	 * @param color the color to set
+	 * @param color the colour to set
 	 */
 	public void setColor(Color color) {
 		this.color = color;
