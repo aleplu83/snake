@@ -14,6 +14,9 @@ public class Wall {
 		blocks = new Rectangle[length];
 		this.color=color;
 		
+		
 	}
+	
+	
 
 }
