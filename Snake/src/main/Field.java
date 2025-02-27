@@ -197,11 +197,11 @@ public class Field extends JPanel implements KeyListener,Runnable {
         }
         g2d.setFont(new Font("Tahoma", Font.PLAIN, 10));
         if (fruit.getPos().x+10 > fieldSize.width-10) {
-        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y+15);
-        } else if (fruit.getPos().y+15 > fieldSize.height-15) {
-        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y-15);
-        } else if ((fruit.getPos().x+10 > fieldSize.width-10) && (fruit.getPos().y+15 > fieldSize.height-15)) {
-        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y-15);
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y+10);
+        } else if (fruit.getPos().y+20 > fieldSize.height-10) {
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y-10);
+        } else if ((fruit.getPos().x+20 > fieldSize.width-10) && (fruit.getPos().y+20 > fieldSize.height-10)) {
+        	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y-10);
         } else {
         	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y+15);
         }
