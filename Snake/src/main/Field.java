@@ -26,7 +26,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private Dimension fieldSize;
 	
 	public Field(Dimension size) {
-		//setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		this.fieldSize=size;
 		setBackground(Color.BLACK);
 		setPreferredSize(size);
