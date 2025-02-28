@@ -35,7 +35,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		requestFocus();
 		
 		snake = new Snake();
-		fruit = new Fruit(newFruitPos(),Color.RED,speeds[level]/speeds[level]*timeouts[level],speeds[level]/speeds[level]*timeouts[level]);
+		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
 		
 		thread = new Thread(this);
 		thread.start();
@@ -124,7 +124,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while (snake.move()) {
 			/*System.out.println(speeds[level]/speeds[level]*5);
 			System.out.println(fruit.getTimeout());*/
@@ -141,20 +140,20 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				gameOver();
 			}
 			
-			if (fruit.getTimeout()!=0) {
+			/*if (fruit.getTimeout()!=0) {
 				fruit.setTimeout(fruit.getTimeout()-1);
 			} else {
 				fruitsMissed+=1;
 				fruit = new Fruit(newFruitPos(),Color.RED,speeds[level]/speeds[level]*timeouts[level],speeds[level]/speeds[level]*timeouts[level]);
 				printStats();
-			}
+			}*/
 			
 			if (gotFruit()) {
 				snake.grow();
 				fruitsTotal+=1;
-				totalPoints+=fruit.getTimeout();
+				totalPoints+=fruit.getValue();
 				
-				fruit = new Fruit(newFruitPos(),Color.RED,speeds[level]/speeds[level]*timeouts[level],speeds[level]/speeds[level]*timeouts[level]);
+				fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
 				for (int i=0;i<levels.length;i++) {
 					if (fruitsTotal==levels[i]) {
 						level=i; //raise level
@@ -188,7 +187,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setColor(fruit.getColor());
         g2d.fillOval(fruit.getPos().x,fruit.getPos().y,10,10);
-        if (fruit.getTimeout()>30) {
+        /*if (fruit.getTimeout()>30) {
         	g2d.setColor(Color.LIGHT_GRAY);
         } else if (fruit.getTimeout()>15 && fruit.getTimeout()<30) {
         	g2d.setColor(Color.YELLOW);
@@ -204,7 +203,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
         	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x-10, fruit.getPos().y-10);
         } else {
         	g2d.drawString(fruit.getTimeout()+"", fruit.getPos().x+10, fruit.getPos().y+15);
-        }
+        }*/
         g2d.setColor(Color.GREEN);
         g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
         g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
