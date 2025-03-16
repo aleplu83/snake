@@ -20,7 +20,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int fruitsMissed=0;
 	private int level=0;
 	private int levels[] = {0,50,100,170,220,350,400};
-	private int speeds[] = {350,300,260,200,150,100,80};
+	private int speeds[] = {100,210,170,110,60,10,5};
 	private Wall[] walls;
 	private Dimension fieldSize;
 	
