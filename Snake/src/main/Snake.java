@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 public class Snake {
@@ -9,9 +10,11 @@ public class Snake {
 	private Point[] newBody;
 	//private Point position = new Point(80,80);
 	private int size; // start length of the snake. 4 blocks of 10px
+	private Dimension fieldSize;
 
-	public Snake() {
+	public Snake(Dimension fieldSize) {
 		this.size=4; //default size of 4 block
+		this.fieldSize=fieldSize;
 		create(80,80);
 	}
 	
@@ -125,24 +128,36 @@ public class Snake {
 		}
 		switch (direction) {
 		case Direction.EAST:
+			if (body[0].x == fieldSize.width) {
+				body[0].x = -10;
+			}
 			if (!isMyBody(body[0].x+10,body[0].y))
 				body[0].x+=10;
 			else
 				return false;
 			break;
 		case Direction.WEST:
+			if (body[0].x == 0) {
+				body[0].x = fieldSize.width;
+			}
 			if (!isMyBody(body[0].x-10,body[0].y))
 				body[0].x-=10;
 			else
 				return false;
 			break;
 		case Direction.NORTH:
+			if (body[0].y == 0) {
+				body[0].y = fieldSize.height;
+			}
 			if (!isMyBody(body[0].x,body[0].y-10))
 				body[0].y-=10;
 			else
 				return false;
 			break;
 		case Direction.SOUTH:
+			if (body[0].y == fieldSize.height) {
+				body[0].y = -10;
+			}
 			if (!isMyBody(body[0].x,body[0].y+10))
 				body[0].y+=10;
 			else
