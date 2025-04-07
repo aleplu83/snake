@@ -32,7 +32,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		setFocusable(true);
 		requestFocus();
 		
-		snake = new Snake();
+		snake = new Snake(fieldSize);
 		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
 		createWalls();
 		
@@ -65,7 +65,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		snake = new Snake();
+		snake = new Snake(fieldSize);
 		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
 		
 		thread = new Thread(this);
@@ -144,9 +144,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 				e.printStackTrace();
 			}
 			
-			if (isCollision()) {
+			/*if (isCollision()) {
 				gameOver();
-			}
+			}*/
 			
 			if (gotFruit()) {
 				snake.grow();
