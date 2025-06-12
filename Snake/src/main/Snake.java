@@ -17,7 +17,6 @@ public class Snake {
 		this.fieldSize=fieldSize;
 		create(80,80);
 	}
-	
 	public Snake(int size) {
 		this.size=size;
 	}

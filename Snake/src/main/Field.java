@@ -62,8 +62,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		snake = new Snake(fieldSize);
 		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
