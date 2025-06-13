@@ -51,34 +51,34 @@ public class Snake {
 	public void grow() {
 		size++;
 		switch (direction) {
-		case Direction.EAST:
-			newBody = new Point[size];
-			System.arraycopy(body, 0, newBody,0,body.length);
-			body= new Point[size];
-			body=newBody;
-			body[size-1] = new Point(body[0].x+((size-1)*10),body[0].y);
-		break;
-		case Direction.WEST:	
-			newBody = new Point[size];
-			System.arraycopy(body, 0, newBody,0,body.length);
-			body= new Point[size];
-			body=newBody;
-			body[size-1] = new Point(body[0].x-((size-1)*10),body[0].y);
-		break;
-		case Direction.NORTH:	
-			newBody = new Point[size];
-			System.arraycopy(body, 0, newBody,0,body.length);
-			body= new Point[size];
-			body=newBody;
-			body[size-1] = new Point(body[0].x,body[0].y+((size-1)*10));
-		break;
-		case Direction.SOUTH:	
-			newBody = new Point[size];
-			System.arraycopy(body, 0, newBody,0,body.length);
-			body= new Point[size];
-			body=newBody;
-			body[size-1] = new Point(body[0].x,body[0].y-((size-1)*10));
-		break;
+		case Direction.EAST -> {
+                    newBody = new Point[size];
+                    System.arraycopy(body, 0, newBody,0,body.length);
+                    body= new Point[size];
+                    body=newBody;
+                    body[size-1] = new Point(body[0].x+((size-1)*10),body[0].y);
+                }
+		case Direction.WEST -> {
+                    newBody = new Point[size];
+                    System.arraycopy(body, 0, newBody,0,body.length);
+                    body= new Point[size];
+                    body=newBody;
+                    body[size-1] = new Point(body[0].x-((size-1)*10),body[0].y);
+                }
+		case Direction.NORTH -> {
+                    newBody = new Point[size];
+                    System.arraycopy(body, 0, newBody,0,body.length);
+                    body= new Point[size];
+                    body=newBody;
+                    body[size-1] = new Point(body[0].x,body[0].y+((size-1)*10));
+                }
+		case Direction.SOUTH -> {
+                    newBody = new Point[size];
+                    System.arraycopy(body, 0, newBody,0,body.length);
+                    body= new Point[size];
+                    body=newBody;
+                    body[size-1] = new Point(body[0].x,body[0].y-((size-1)*10));
+                }
 		}
 	
 		
