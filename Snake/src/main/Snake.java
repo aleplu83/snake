@@ -25,26 +25,26 @@ public class Snake {
 		body = new Point[size];
 		body[0] = new Point(startX,startY);
 		switch (direction) {
-		case Direction.EAST:
-			for (int i=1;i<size;i++) {
-				body[i]=new Point(startX-(i*10),startY);
-			}
-			break;
-		case Direction.WEST:
-			for (int i=1;i<size;i++) {
-				body[i]=new Point(startX+(i*10),startY);
-			}
-			break;
-		case Direction.NORTH:
-			for (int i=1;i<size;i++) {
-				body[i]=new Point(startX,startY+(i*10));
-			}
-			break;
-		case Direction.SOUTH:
-			for (int i=1;i<size;i++) {
-				body[i]=new Point(startX,startY-(i*10));
-			}
-			break;
+		case Direction.EAST -> {
+                    for (int i=1;i<size;i++) {
+                        body[i]=new Point(startX-(i*10),startY);
+                    }
+                }
+		case Direction.WEST -> {
+                    for (int i=1;i<size;i++) {
+                        body[i]=new Point(startX+(i*10),startY);
+                    }
+                }
+		case Direction.NORTH -> {
+                    for (int i=1;i<size;i++) {
+                        body[i]=new Point(startX,startY+(i*10));
+                    }
+                }
+		case Direction.SOUTH -> {
+                    for (int i=1;i<size;i++) {
+                        body[i]=new Point(startX,startY-(i*10));
+                    }
+                }
 		}
 	}
 	
