@@ -19,13 +19,13 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private int fruitsEaten=0;
 	private int fruitsMissed=0;
 	private int level=0;
-	private int levels[] = {0,50,100,170,220,350,400};
-	private int speeds[] = {100,210,170,110,60,10,5};
-	private Wall[] walls;
-	private Dimension fieldSize;
+	private final int levels[] = {0,50,100,170,220,350,400};
+	private final int speeds[] = {100,210,170,110,60,10,5};
+	//private Wall[] walls;
+	private final Dimension fieldSize;
 	
 	public Field(Dimension size) {
-		this.fieldSize=size;
+		fieldSize=size;
 		setBackground(Color.BLACK);
 		setPreferredSize(size);
 		addKeyListener(this);
@@ -34,16 +34,16 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		
 		snake = new Snake(fieldSize);
 		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
-		createWalls();
+		//createWalls();
 		
 		thread = new Thread(this);
 		thread.start();
 		
 	}
 	
-	private void createWalls() {
+	/*private void createWalls() {
 		walls = new Wall[2];
-	}
+	}*/
 	
 	private Point newFruitPos() {
 		Point p = new Point();
@@ -138,8 +138,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
 			try {
 				Thread.sleep(speeds[level]);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			
 			/*if (isCollision()) {
@@ -183,11 +181,11 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	public void drawFruit(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.setColor(fruit.getColor());
-        g2d.fillOval(fruit.getPos().x,fruit.getPos().y,10,10);
-        g2d.setColor(Color.GREEN);
-        g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
-        g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
+                g2d.setColor(fruit.getColor());
+                g2d.fillOval(fruit.getPos().x,fruit.getPos().y,10,10);
+                g2d.setColor(Color.GREEN);
+                g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
+                g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
 		g2d.dispose();
 	}
 	@Override
