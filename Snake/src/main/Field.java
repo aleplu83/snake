@@ -32,7 +32,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		setFocusable(true);
 		requestFocus();
 		
-		snake = new Snake(fieldSize);
+		snake = new Snake(fieldSize,80,80);
 		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
 		//createWalls();
 		
@@ -54,7 +54,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		return p;
 	}
 	
-	private void gameOver() {
+	/*private void gameOver() {
 		level=0;
 		fruitsEaten=0;
 		fruitsMissed=0;
@@ -68,7 +68,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		
 		thread = new Thread(this);
 		thread.start();
-	}
+	}*/
 
 	@Override
 	public void keyPressed(KeyEvent e) {
