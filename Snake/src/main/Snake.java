@@ -126,42 +126,42 @@ public class Snake {
 			body[i].y=body[i-1].y;
 		}
 		switch (direction) {
-		case Direction.EAST:
-			if (body[0].x == fieldSize.width) {
-				body[0].x = -10;
-			}
-			if (!isMyBody(body[0].x+10,body[0].y))
-				body[0].x+=10;
-			else
-				return false;
-			break;
-		case Direction.WEST:
-			if (body[0].x == 0) {
-				body[0].x = fieldSize.width;
-			}
-			if (!isMyBody(body[0].x-10,body[0].y))
-				body[0].x-=10;
-			else
-				return false;
-			break;
-		case Direction.NORTH:
-			if (body[0].y == 0) {
-				body[0].y = fieldSize.height;
-			}
-			if (!isMyBody(body[0].x,body[0].y-10))
-				body[0].y-=10;
-			else
-				return false;
-			break;
-		case Direction.SOUTH:
-			if (body[0].y == fieldSize.height) {
-				body[0].y = -10;
-			}
-			if (!isMyBody(body[0].x,body[0].y+10))
-				body[0].y+=10;
-			else
-				return false;
-			break;
+		case Direction.EAST -> {
+                    if (body[0].x == fieldSize.width) {
+                        body[0].x = -10;
+                    }
+                    if (!isMyBody(body[0].x+10,body[0].y))
+                        body[0].x+=10;
+                    else
+                        return false;
+                }
+		case Direction.WEST -> {
+                    if (body[0].x == 0) {
+                        body[0].x = fieldSize.width;
+                    }
+                    if (!isMyBody(body[0].x-10,body[0].y))
+                        body[0].x-=10;
+                    else
+                        return false;
+                }
+		case Direction.NORTH -> {
+                    if (body[0].y == 0) {
+                        body[0].y = fieldSize.height;
+                    }
+                    if (!isMyBody(body[0].x,body[0].y-10))
+                        body[0].y-=10;
+                    else
+                        return false;
+                }
+		case Direction.SOUTH -> {
+                    if (body[0].y == fieldSize.height) {
+                        body[0].y = -10;
+                    }
+                    if (!isMyBody(body[0].x,body[0].y+10))
+                        body[0].y+=10;
+                    else
+                        return false;
+                }
 		}
 		return true;
 	}
