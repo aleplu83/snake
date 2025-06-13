@@ -21,7 +21,7 @@ public class Snake {
 		this.size=size;
 	}
 	
-	public void create(int startX,int startY) {
+	public final void create(int startX,int startY) {
 		body = new Point[size];
 		body[0] = new Point(startX,startY);
 		switch (direction) {
