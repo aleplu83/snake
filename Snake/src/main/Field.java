@@ -73,18 +73,14 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case 39: // go east
+		case 39 -> // go east
 			snake.goEast();
-			break;
-		case 37: // go west
+		case 37 -> // go west
 			snake.goWest();
-			break;
-		case 40: // go South
+		case 40 -> // go South
 			snake.goSouth();
-			break;
-		case 38: // go North
+		case 38 -> // go North
 			snake.goNorth();
-			break;
 		}
 	}
 
@@ -106,22 +102,13 @@ public class Field extends JPanel implements KeyListener,Runnable {
 		return level;
 	}
 
-	private boolean isCollision() {
-		
-		if (snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || 
-			snake.getBody()[0].x > (fieldSize.width-10) || snake.getBody()[0].y > fieldSize.height-10)
-			return true;
-		
-		
-		return false;
-	}
+	/*private boolean isCollision() {
+		return snake.getBody()[0].x < 0 || snake.getBody()[0].y < 0 || 
+                        snake.getBody()[0].x > (fieldSize.width-10) || snake.getBody()[0].y > fieldSize.height-10;
+	}*/
 	
 	private boolean gotFruit() {
-		
-		if (snake.getBody()[0].x == fruit.getPos().x && snake.getBody()[0].y == fruit.getPos().y) 
-			return true;
-		
-		return false;
+		return snake.getBody()[0].x == fruit.getPos().x && snake.getBody()[0].y == fruit.getPos().y;
 	}
 
 	private void printStats() {
