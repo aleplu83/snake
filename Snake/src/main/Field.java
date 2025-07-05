@@ -89,10 +89,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		drawSnake(g);
-		if (fruit.getTimeout()!=0)
-			drawFruit(g);
-		
-		
+		drawFruit(g);
 	}
 	
 	/**
@@ -134,7 +131,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 			if (gotFruit()) {
 				snake.grow();
 				fruitsEaten+=1;
-				points+=fruit.getValue();
+				points+=1;
 				
 				fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
 				for (int i=0;i<levels.length;i++) {
