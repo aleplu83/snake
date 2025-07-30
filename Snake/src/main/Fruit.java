@@ -7,8 +7,6 @@ public class Fruit {
 
 	private Point pos;
 	private Color color;
-	private int value;
-	private int timeout=-1; // if value greater than 0 this fruit will disappear after 'value' seconds have passed
 	
 	/**
 	 * @param pos position on the field
@@ -20,12 +18,6 @@ public class Fruit {
 		super();
 		this.pos = pos;
 		this.color = color;
-		this.value = value;
-		this.timeout = timeout;
-	}
-	
-	public Fruit() {
-		
 	}
 
 	/**
@@ -55,36 +47,4 @@ public class Fruit {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
-	/**
-	 * @return the value
-	 */
-	public int getValue() {
-		return value;
-	}
-
-	/**
-	 * @param value the value to set
-	 */
-	public void setValue(int value) {
-		this.value = value;
-	}
-
-	/**
-	 * @return the timeout
-	 */
-	public int getTimeout() {
-		return timeout;
-	}
-
-	/**
-	 * @param timeout the timeout to set
-	 */
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
-
-	
-	
-	
 }
