@@ -2,13 +2,12 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import javax.swing.JFrame;
 
 public class Window {
 
 	private final JFrame mainWindow;
-	private Field field;
+	private final Field field;
 	
 	public Window() {
 		mainWindow = new JFrame("Snake");
@@ -24,7 +23,6 @@ public class Window {
 		mainWindow.pack();
 		mainWindow.setVisible(true);
 		mainWindow.setResizable(false);
-		
 	}
 	
 	public static void main(String[] args) {
