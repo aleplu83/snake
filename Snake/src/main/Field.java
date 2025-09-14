@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Field extends JPanel implements KeyListener,Runnable {
  
-	private Snake snake;
+	private final Snake snake;
 	private Thread thread;
 	private Fruit fruit;
 	private int points=0;
@@ -73,14 +73,10 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case 39 -> // go east
-			snake.goEast();
-		case 37 -> // go west
-			snake.goWest();
-		case 40 -> // go South
-			snake.goSouth();
-		case 38 -> // go North
-			snake.goNorth();
+		case 39 -> snake.goEast();
+		case 37 -> snake.goWest();
+		case 40 -> snake.goSouth();
+		case 38 -> snake.goNorth();
 		}
 	}
 
@@ -117,31 +113,30 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	@Override
 	public void run() {
 		while (snake.move()) {
-			repaint();
-			
-			try {
-				Thread.sleep(speeds[level]);
-			} catch (InterruptedException e) {
-			}
-			
-			/*if (isCollision()) {
-				gameOver();
-			}*/
-			
-			if (gotFruit()) {
-				snake.grow();
-				fruitsEaten+=1;
-				points+=1;
-				
-				fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
-				for (int i=0;i<levels.length;i++) {
-					if (fruitsEaten==levels[i]) {
-						level=i; //raise level
-					}
-				}
-				printStats();
-			}
-		}
+                    repaint();
+                    try {
+                        Thread.sleep(speeds[level]);
+                    } catch (InterruptedException e) {
+                    }
+
+                    /*if (isCollision()) {
+                            gameOver();
+                    }*/
+
+                    if (gotFruit()) {
+                        snake.grow();
+                        fruitsEaten+=1;
+                        points+=1;
+
+                        fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
+                        for (int i=0;i<levels.length;i++) {
+                                if (fruitsEaten==levels[i]) {
+                                        level=i; //raise level
+                                }
+                        }
+                        printStats();
+                    }
+                }
 		
 	}
 	
