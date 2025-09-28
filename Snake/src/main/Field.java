@@ -25,19 +25,19 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	private final Dimension fieldSize;
 	
 	public Field(Dimension size) {
-		fieldSize=size;
-		setBackground(Color.BLACK);
-		setPreferredSize(size);
-		addKeyListener(this);
-		setFocusable(true);
-		requestFocus();
-		
-		snake = new Snake(fieldSize,80,80);
-		fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
-		//createWalls();
-		
-		thread = new Thread(this);
-		thread.start();
+            fieldSize=size;
+            setBackground(Color.BLACK);
+            setPreferredSize(size);
+            addKeyListener(this);
+            setFocusable(true);
+            requestFocus();
+
+            snake = new Snake(fieldSize,80,80);
+            fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
+            //createWalls();
+
+            thread = new Thread(this);
+            thread.start();
 		
 	}
 	
@@ -46,12 +46,12 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	}*/
 	
 	private Point newFruitPos() {
-		Point p = new Point();
-		do {
-			p.x=getRnd(10,fieldSize.width-10);
-			p.y=getRnd(10,fieldSize.height-10);
-		} while (snake.isMyBody(p.x, p.y));
-		return p;
+            Point p = new Point();
+            do {
+                p.x=getRnd(10,fieldSize.width-10);
+                p.y=getRnd(10,fieldSize.height-10);
+            } while (snake.isMyBody(p.x, p.y));
+            return p;
 	}
 	
 	/*private void gameOver() {
@@ -72,27 +72,27 @@ public class Field extends JPanel implements KeyListener,Runnable {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case 39 -> snake.goEast();
-		case 37 -> snake.goWest();
-		case 40 -> snake.goSouth();
-		case 38 -> snake.goNorth();
-		}
+            switch (e.getKeyCode()) {
+                case 39 -> snake.goEast();
+                case 37 -> snake.goWest();
+                case 40 -> snake.goSouth();
+                case 38 -> snake.goNorth();
+            }
 	}
 
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		drawSnake(g);
-		drawFruit(g);
+            super.paintComponent(g);
+            drawSnake(g);
+            drawFruit(g);
 	}
 	
 	/**
 	 * @return the level
 	 */
 	public int getLevel() {
-		return level;
+            return level;
 	}
 
 	/*private boolean isCollision() {
@@ -101,71 +101,70 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	}*/
 	
 	private boolean gotFruit() {
-		return snake.getBody()[0].x == fruit.getPos().x && snake.getBody()[0].y == fruit.getPos().y;
+            return snake.getBody()[0].x == fruit.getPos().x && snake.getBody()[0].y == fruit.getPos().y;
 	}
 
 	private void printStats() {
-		System.out.println("Level: "+level);
-		System.out.println("Fruits eaten/missed: "+fruitsEaten+"/"+fruitsMissed);
-		System.out.println("Total points: "+points);
+            System.out.println("Level: "+level);
+            System.out.println("Fruits eaten/missed: "+fruitsEaten+"/"+fruitsMissed);
+            System.out.println("Total points: "+points);
 	}
 	
 	@Override
 	public void run() {
-		while (snake.move()) {
-                    repaint();
-                    try {
-                        Thread.sleep(speeds[level]);
-                    } catch (InterruptedException e) {
-                    }
-
-                    /*if (isCollision()) {
-                            gameOver();
-                    }*/
-
-                    if (gotFruit()) {
-                        snake.grow();
-                        fruitsEaten+=1;
-                        points+=1;
-
-                        fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
-                        for (int i=0;i<levels.length;i++) {
-                                if (fruitsEaten==levels[i]) {
-                                        level=i; //raise level
-                                }
-                        }
-                        printStats();
-                    }
+            while (snake.move()) {
+                repaint();
+                try {
+                    Thread.sleep(speeds[level]);
+                } catch (InterruptedException e) {
                 }
-		
+
+                /*if (isCollision()) {
+                        gameOver();
+                }*/
+
+                if (gotFruit()) {
+                    snake.grow();
+                    fruitsEaten+=1;
+                    points+=1;
+
+                    fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
+                    for (int i=0;i<levels.length;i++) {
+                        if (fruitsEaten==levels[i]) {
+                                level=i; //raise level
+                        }
+                    }
+                    printStats();
+                }
+            }
 	}
 	
 	private int getRnd(int min,int max) {
-		int rndNumber;
-		do {
-			rndNumber=((int) (Math.random() * fieldSize.width));
-		} while (rndNumber < min || rndNumber > max);
-		
-		return (int) (Math.ceil(rndNumber / 10.0)*10);
+            int rndNumber;
+            do {
+                rndNumber=((int) (Math.random() * fieldSize.width));
+            } while (rndNumber < min || rndNumber > max);
+
+            return (int) (Math.ceil(rndNumber / 10.0)*10);
 	}
 	
 	public void drawSnake(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.setColor(Color.YELLOW);
-		for (Point rect : snake.getBody()) {
-			g2d.fill3DRect(rect.x, rect.y, 10, 10, true);
-		}
-		g2d.dispose();
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setColor(Color.YELLOW);
+            for (Point rect : snake.getBody()) {
+                    g2d.fill3DRect(rect.x, rect.y, 10, 10, true);
+            }
+            g2d.dispose();
 	}
 	
 	public void drawFruit(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setColor(fruit.getColor());
-                g2d.fillOval(fruit.getPos().x,fruit.getPos().y,10,10);
-                g2d.setColor(Color.GREEN);
-                g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
-                g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
-		g2d.dispose();
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setColor(fruit.getColor());
+            g2d.fillOval(fruit.getPos().x,fruit.getPos().y,10,10);
+            g2d.setColor(Color.GREEN);
+            g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x, fruit.getPos().y-3);
+            g2d.drawLine(fruit.getPos().x+5, fruit.getPos().y, fruit.getPos().x+10, fruit.getPos().y-3);
+            g2d.dispose();
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {

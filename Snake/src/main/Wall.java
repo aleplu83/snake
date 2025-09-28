@@ -9,35 +9,35 @@ public class Wall {
 	private Color color;
 	
 	public Wall(Color color,int startX,int startY,int endX,int endY) {
-		this.color=color;
+            this.color=color;
 	}
 
 	/**
 	 * @return the blocks
 	 */
 	public Rectangle[] getBlocks() {
-		return blocks;
+            return blocks;
 	}
 
 	/**
 	 * @param blocks the blocks to set
 	 */
 	public void setBlocks(Rectangle[] blocks) {
-		this.blocks = blocks;
+            this.blocks = blocks;
 	}
 
 	/**
 	 * @return the color
 	 */
 	public Color getColor() {
-		return color;
+            return color;
 	}
 
 	/**
 	 * @param color the color to set
 	 */
 	public void setColor(Color color) {
-		this.color = color;
+            this.color = color;
 	}
 	
 	

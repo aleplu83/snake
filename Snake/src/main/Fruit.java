@@ -15,36 +15,36 @@ public class Fruit {
 	 * @param timeout timeout in seconds before the fruit disappears
 	 */
 	public Fruit(Point pos, Color color, int value, int timeout) {
-		super();
-		this.pos = pos;
-		this.color = color;
+            super();
+            this.pos = pos;
+            this.color = color;
 	}
 
 	/**
 	 * @return returns Point object with the position of this fruit
 	 */
 	public Point getPos() {
-		return pos;
+            return pos;
 	}
 
 	/**
 	 * @param pos the pos to set
 	 */
 	public void setPos(Point pos) {
-		this.pos = pos;
+            this.pos = pos;
 	}
 
 	/**
 	 * @return the colour
 	 */
 	public Color getColor() {
-		return color;
+            return color;
 	}
 
 	/**
 	 * @param color the colour to set
 	 */
 	public void setColor(Color color) {
-		this.color = color;
+            this.color = color;
 	}
 }
