@@ -9,11 +9,11 @@ public class Snake {
 	private Point[] body;
 	private Point[] newBody;
 	//private Point position = new Point(80,80);
-	private int size; // start length of the snake. 4 blocks of 10px
+	private int size=4; // start length of the snake. 4 blocks of 10px
 	private Dimension fieldSize;
 
 	public Snake(Dimension fieldSize,int startX,int startY) {
-            this.size=4; //default size of 4 block
+            //this.size=4; //default size of 4 block
             this.fieldSize=fieldSize;
             create(startX,startY);
 	}
