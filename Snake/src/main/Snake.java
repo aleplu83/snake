@@ -152,8 +152,8 @@ public class Snake {
                         return false;
                 }
                 case Direction.SOUTH -> {
-                    if (body[0].y == fieldSize.height) {
-                        body[0].y = -10;
+                    if (body[0].y == fieldSize.height-10) {
+                        body[0].y =-10;
                     }
                     if (!isMyBody(body[0].x,body[0].y+10))
                         body[0].y+=10;
