@@ -150,9 +150,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	
 	public void drawSnake(Graphics g) {
             Graphics2D g2d = (Graphics2D) g.create();
-            g2d.setColor(Color.YELLOW);
+            g2d.setColor(Color.WHITE);
             for (Point rect : snake.getBody()) {
-                    g2d.fill3DRect(rect.x, rect.y, 10, 10, true);
+                    g2d.fillRect(rect.x, rect.y, 10, 10);
             }
             g2d.dispose();
 	}
