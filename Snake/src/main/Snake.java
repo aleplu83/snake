@@ -12,9 +12,10 @@ public class Snake {
 	private int size=4; // start length of the snake. 4 blocks of 10px
 	private Dimension fieldSize;
 
-	public Snake(Dimension fieldSize,int startX,int startY) {
+	public Snake(Dimension fieldSize,int startX,int startY,Direction startDirection) {
             //this.size=4; //default size of 4 block
             this.fieldSize=fieldSize;
+            this.direction = startDirection;
             create(startX,startY);
 	}
 	public Snake(int size) {
@@ -125,7 +126,7 @@ public class Snake {
             }
             switch (direction) {
                 case Direction.EAST -> {
-                    if (body[0].x == fieldSize.width) {
+                    if (body[0].x == fieldSize.width-10) {
                         body[0].x = -10;
                     }
                     if (!isMyBody(body[0].x+10,body[0].y))
