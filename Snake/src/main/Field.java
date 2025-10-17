@@ -31,8 +31,8 @@ public class Field extends JPanel implements KeyListener,Runnable {
             addKeyListener(this);
             setFocusable(true);
             requestFocus();
-
-            snake = new Snake(fieldSize,80,80);
+          
+            snake = new Snake(fieldSize,fieldSize.width/2,fieldSize.height/2,Direction.WEST);
             fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
             //createWalls();
 
@@ -44,7 +44,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	/*private void createWalls() {
 		walls = new Wall[2];
 	}*/
-	
+        
 	private Point newFruitPos() {
             Point p = new Point();
             do {
