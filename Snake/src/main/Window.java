@@ -11,9 +11,9 @@ public class Window {
 	
 	public Window() {
             mainWindow = new JFrame("Snake");
-            field = new Field(new Dimension(500,500));
+            field = new Field(new Dimension(800,600));
 
-            mainWindow.setSize(800,600);
+            //mainWindow.setSize(800,600);
             mainWindow.setLocation(400, 200);
             mainWindow.setLayout(new FlowLayout());
 
