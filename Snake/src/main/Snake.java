@@ -103,7 +103,10 @@ public class Snake {
 		direction=Direction.EAST;
 	}
 	
-	protected boolean isMyBody(int x,int y) {
+	public boolean isMyBody(int x,int y) {
+            /*
+            returns true if x and y are located in the snake body
+            */
             for (int i=0;i<body.length;i++) { 
                 if (x==body[i].x && y==body[i].y) {
                     return true;

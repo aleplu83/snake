@@ -73,10 +73,10 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	@Override
 	public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case 39 -> snake.goEast();
-                case 37 -> snake.goWest();
-                case 40 -> snake.goSouth();
-                case 38 -> snake.goNorth();
+                case 39 -> snake.goEast(); //left key
+                case 37 -> snake.goWest(); //right key
+                case 40 -> snake.goSouth(); //down key
+                case 38 -> snake.goNorth(); //up key
             }
 	}
 
