@@ -82,8 +82,8 @@ public class Snake {
 	}
 	
 	protected boolean isMyBody(int x,int y) {
-            for (Point p : body)
-                 if (x==p.x && y==p.y) 
+            for (Point p : body) 
+                if (x==p.x && y==p.y) 
                     return true;
                 
             return false;

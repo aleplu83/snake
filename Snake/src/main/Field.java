@@ -101,7 +101,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	}*/
 	
 	private boolean gotFruit() {
-            return snake.getBody().get(0).x == fruit.getPos().x && snake.getBody().get(0).y == fruit.getPos().y;
+            return snake.getBody().getFirst().x == fruit.getPos().x && snake.getBody().getFirst().y == fruit.getPos().y;
 	}
 
 	private void printStats() {
@@ -151,9 +151,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public void drawSnake(Graphics g) {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setColor(Color.WHITE);
-            for (Point rect : snake.getBody()) {
+            for (Point rect : snake.getBody()) 
                     g2d.fillRect(rect.x, rect.y, 10, 10);
-            }
+            
             g2d.dispose();
 	}
 	
