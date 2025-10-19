@@ -101,7 +101,7 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	}*/
 	
 	private boolean gotFruit() {
-            return snake.getBody()[0].x == fruit.getPos().x && snake.getBody()[0].y == fruit.getPos().y;
+            return snake.getBody().get(0).x == fruit.getPos().x && snake.getBody().get(0).y == fruit.getPos().y;
 	}
 
 	private void printStats() {

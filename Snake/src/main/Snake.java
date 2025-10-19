@@ -2,83 +2,61 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Snake {
 
 	private Direction direction = Direction.EAST;
-	private Point[] body;
-	private Point[] newBody;
+        private ArrayList<Point> body;
 	//private Point position = new Point(80,80);
-	private int size=4; // start length of the snake. 4 blocks of 10px
 	private Dimension fieldSize;
 
 	public Snake(Dimension fieldSize,int startX,int startY,Direction startDirection) {
-            //this.size=4; //default size of 4 block
             this.fieldSize=fieldSize;
             this.direction = startDirection;
             create(startX,startY);
 	}
-	public Snake(int size) {
-            this.size=size;
-	}
 	
 	public final void create(int startX,int startY) {
-            body = new Point[size];
-            body[0] = new Point(startX,startY);
+            body = new ArrayList<>(4);
+            body.addFirst(new Point(startX,startY));
             switch (direction) {
                 case Direction.EAST -> {
-                    for (int i=1;i<size;i++) {
-                        body[i]=new Point(startX-(i*10),startY);
+                    for (int i=1;i<4;i++) {
+                        body.add(i, new Point(startX-(i*10),startY));
                     }
                 }
                 case Direction.WEST -> {
-                    for (int i=1;i<size;i++) {
-                        body[i]=new Point(startX+(i*10),startY);
+                    for (int i=1;i<4;i++) {
+                        body.add(i, new Point(startX+(i*10),startY));
                     }
                 }
                 case Direction.NORTH -> {
-                    for (int i=1;i<size;i++) {
-                        body[i]=new Point(startX,startY+(i*10));
+                    for (int i=1;i<4;i++) {
+                        body.add(i,new Point(startX,startY+(i*10)));
                     }
                 }
                 case Direction.SOUTH -> {
-                    for (int i=1;i<size;i++) {
-                        body[i]=new Point(startX,startY-(i*10));
+                    for (int i=1;i<4;i++) {
+                        body.add(i,new Point(startX,startY-(i*10)));
                     }
                 }
             }
 	}
 	
 	public void grow() {
-            size++;
             switch (direction) {
                 case Direction.EAST -> {
-                    newBody = new Point[size];
-                    System.arraycopy(body, 0, newBody,0,body.length);
-                    body= new Point[size];
-                    body=newBody;
-                    body[size-1] = new Point(body[0].x+((size-1)*10),body[0].y);
+                    body.add(new Point(body.getLast().x+10,body.getLast().y));
                 }
                 case Direction.WEST -> {
-                    newBody = new Point[size];
-                    System.arraycopy(body, 0, newBody,0,body.length);
-                    body= new Point[size];
-                    body=newBody;
-                    body[size-1] = new Point(body[0].x-((size-1)*10),body[0].y);
+                    body.add(new Point(body.getLast().x-10,body.getLast().y));
                 }
                 case Direction.NORTH -> {
-                    newBody = new Point[size];
-                    System.arraycopy(body, 0, newBody,0,body.length);
-                    body= new Point[size];
-                    body=newBody;
-                    body[size-1] = new Point(body[0].x,body[0].y+((size-1)*10));
+                    body.add(new Point(body.getLast().x,body.getLast().y+10));
                 }
                 case Direction.SOUTH -> {
-                    newBody = new Point[size];
-                    System.arraycopy(body, 0, newBody,0,body.length);
-                    body= new Point[size];
-                    body=newBody;
-                    body[size-1] = new Point(body[0].x,body[0].y-((size-1)*10));
+                    body.add(new Point(body.getLast().x,body.getLast().y-10));
                 }
             }
 	}
@@ -103,64 +81,63 @@ public class Snake {
 		direction=Direction.EAST;
 	}
 	
-	public boolean isMyBody(int x,int y) {
-            /*
-            returns true if x and y are located in the snake body
-            */
-            for (int i=0;i<body.length;i++) { 
-                if (x==body[i].x && y==body[i].y) {
+	protected boolean isMyBody(int x,int y) {
+            for (Point p : body)
+                 if (x==p.x && y==p.y) 
                     return true;
-                }	
-            }
+                
             return false;
 	}
 	
 	/**
 	 * @return the body
 	 */
-	public Point[] getBody() {
+	public ArrayList<Point> getBody() {
             return body;
 	}
 
 	protected boolean move() {
-            for (int i=body.length-1;i!=0;i--) {
-                    body[i].x=body[i-1].x;
-                    body[i].y=body[i-1].y;
+            int headX=body.getFirst().x;
+            int headY=body.getFirst().y;
+            
+            for (int i=body.size()-1;i!=0;i--) {
+                    body.get(i).x=body.get(i-1).x;
+                    body.get(i).y=body.get(i-1).y;
             }
             switch (direction) {
                 case Direction.EAST -> {
-                    if (body[0].x == fieldSize.width-10) {
-                        body[0].x = -10;
-                    }
-                    if (!isMyBody(body[0].x+10,body[0].y))
-                        body[0].x+=10;
+                    if (headX == fieldSize.width-10) 
+                        body.getFirst().x = -10;
+                    
+                    if (!isMyBody(headX+10,headY))
+                        body.getFirst().x += 10;
                     else
                         return false;
                 }
                 case Direction.WEST -> {
-                    if (body[0].x == 0) {
-                        body[0].x = fieldSize.width;
+                    if (headX == 0) {
+                        body.getFirst().x = fieldSize.width;
                     }
-                    if (!isMyBody(body[0].x-10,body[0].y))
-                        body[0].x-=10;
+                    if (!isMyBody(headX-10,headY))
+                        body.getFirst().x-=10;
                     else
                         return false;
                 }
                 case Direction.NORTH -> {
-                    if (body[0].y == 0) {
-                        body[0].y = fieldSize.height;
+                    if (headY == 0) {
+                        body.getFirst().y = fieldSize.height;
                     }
-                    if (!isMyBody(body[0].x,body[0].y-10))
-                        body[0].y-=10;
+                    if (!isMyBody(headX,headY-10))
+                        body.getFirst().y-=10;
                     else
                         return false;
                 }
                 case Direction.SOUTH -> {
-                    if (body[0].y == fieldSize.height-10) {
-                        body[0].y =-10;
+                    if (headY == fieldSize.height-10) {
+                        body.getFirst().y =-10;
                     }
-                    if (!isMyBody(body[0].x,body[0].y+10))
-                        body[0].y+=10;
+                    if (!isMyBody(headX,headY+10))
+                        body.getFirst().y+=10;
                     else
                         return false;
                 }
