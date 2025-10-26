@@ -8,12 +8,13 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @SuppressWarnings("serial")
-public class Field extends JPanel implements KeyListener,Runnable {
+public class Field extends JPanel implements KeyListener {
  
 	private final Snake snake;
-	private Thread thread;
 	private Fruit fruit;
 	private int points=0;
 	private int fruitsEaten=0;
@@ -34,11 +35,9 @@ public class Field extends JPanel implements KeyListener,Runnable {
           
             snake = new Snake(fieldSize,fieldSize.width/2,fieldSize.height/2,Direction.WEST);
             fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
-            //createWalls();
-
-            thread = new Thread(this);
-            thread.start();
-		
+            
+            startGame();
+            
 	}
 	
 	/*private void createWalls() {
@@ -110,34 +109,6 @@ public class Field extends JPanel implements KeyListener,Runnable {
             System.out.println("Total points: "+points);
 	}
 	
-	@Override
-	public void run() {
-            while (snake.move()) {
-                repaint();
-                try {
-                    Thread.sleep(speeds[level]);
-                } catch (InterruptedException e) {
-                }
-
-                /*if (isCollision()) {
-                        gameOver();
-                }*/
-
-                if (gotFruit()) {
-                    snake.grow();
-                    fruitsEaten+=1;
-                    points+=1;
-
-                    fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
-                    for (int i=0;i<levels.length;i++) {
-                        if (fruitsEaten==levels[i]) {
-                                level=i; //raise level
-                        }
-                    }
-                    printStats();
-                }
-            }
-	}
 	
 	private int getRnd(int min,int max) {
             int rndNumber;
@@ -175,5 +146,32 @@ public class Field extends JPanel implements KeyListener,Runnable {
 	public void keyReleased(KeyEvent e) {
 		
 	}
+
+    private void startGame() {
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    snake.move();
+                    repaint();
+                    if (gotFruit()) {
+                        snake.grow();
+                        fruitsEaten+=1;
+                        points+=1;
+
+                        fruit = new Fruit(newFruitPos(),Color.RED,1,-1);
+                        for (int i=0;i<levels.length;i++) {
+                            if (fruitsEaten==levels[i]) {
+                                    level=i; //raise level
+                            }
+                        }
+                        //printStats();
+                    }
+                    
+                }
+            };
+            
+            timer.scheduleAtFixedRate(timerTask, 2000, speeds[level]);	
+    }
 
 }

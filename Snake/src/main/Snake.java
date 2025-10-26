@@ -81,7 +81,7 @@ public class Snake {
 		direction=Direction.EAST;
 	}
 	
-	protected boolean isMyBody(int x,int y) {
+	public boolean isMyBody(int x,int y) {
             for (Point p : body) 
                 if (x==p.x && y==p.y) 
                     return true;
@@ -96,7 +96,7 @@ public class Snake {
             return body;
 	}
 
-	protected boolean move() {
+	public void move() {
             int headX=body.getFirst().x;
             int headY=body.getFirst().y;
             
@@ -112,7 +112,7 @@ public class Snake {
                     if (!isMyBody(headX+10,headY))
                         body.getFirst().x += 10;
                     else
-                        return false;
+                        create(80,80);
                 }
                 case Direction.WEST -> {
                     if (headX == 0) {
@@ -121,7 +121,7 @@ public class Snake {
                     if (!isMyBody(headX-10,headY))
                         body.getFirst().x-=10;
                     else
-                        return false;
+                        create(80,80);
                 }
                 case Direction.NORTH -> {
                     if (headY == 0) {
@@ -130,7 +130,7 @@ public class Snake {
                     if (!isMyBody(headX,headY-10))
                         body.getFirst().y-=10;
                     else
-                        return false;
+                        create(80,80);
                 }
                 case Direction.SOUTH -> {
                     if (headY == fieldSize.height-10) {
@@ -139,10 +139,9 @@ public class Snake {
                     if (!isMyBody(headX,headY+10))
                         body.getFirst().y+=10;
                     else
-                        return false;
+                        create(80,80);
                 }
             }
-            return true;
 	}
 
 	/**
